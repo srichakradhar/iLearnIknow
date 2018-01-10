@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- <link href="https://cdn.botframework.com/botframework-webchat/latest/botchat.css" rel="stylesheet" /> -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="index_another.css" rel="stylesheet" />
+  <base href="/">
+  <title>Conversation Chat App</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta property="og:image" content="conversation.svg" />
+  <meta property="og:title" content="Conversation Chat Simple" />
+  <meta property="og:description" content="Sample application that shows how to use the Conversation API to identify user intents" />
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="css/app_another.css">
+</head>
+
+<body>
+  <div id="center-text">
+    <h2>Cisco ContentHub</h2>
+    <p>Customer handling chatbot</p>
+  </div>
+  <!--
+Inspired by https://dribbble.com/supahfunk
+-->
+  <section class="avenue-messenger">
+    <div class="menu">
+      <div class="items"><span>
+           <a href="#" title="Minimize">&mdash;</a><br>
+      <!--     
+           <a href="">enter email</a><br>
+           <a href="">email transcript</a><br>-->
+           <a href="#" title="End Chat">&#10005;</a>
+           
+           </span></div>
+      <div class="button">...</div>
+    </div>
+    <div class="agent-face">
+      <div class="half">
+          <!-- https://pbs.twimg.com/profile_images/719328931090866176/6KqIGHL3.jpg
+          https://vignette.wikia.nocookie.net/logopedia/images/d/d4/Cisco.png
+         https://seekcdn.com/pacman/company-profiles/logos/432649/cisco-systems-logo.png
+         https://www.cisco.com/web/fw/i/logo-open-graph.gif
+        -->
+        <img class="agent circle" src="img/Cisco_Logo.jpg" alt="Chatbot"></div>
+    </div>
+    <div class="chat">
+      <div class="chat-title">
+        <h1>Chatbot</h1>
+        <!-- <h2>RE/MAX</h2> -->
+        <!--  <figure class="avatar">
+            <img src="http://askavenue.com/img/17.jpg" /></figure>-->
+      </div>
+      <div class="messages">
+        <div class="messages-content">
+          <div id="contentParent" class="responsive-columns-wrapper">
+            <div id="chat-column-holder" class="responsive-column content-column">
+              <div class="chat-column">
+                <div id="scrollingChat"></div>
+                <label for="textInput" class="inputOutline">
+                  <input id="textInput" class="input responsive-column"
+                    placeholder="Type something" type="text"
+                    onkeydown="ConversationPanel.inputKeyDown(event, this)">
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- <div id="bot"/> -->
+      </div>
+      <!-- <div class="message-box">
+        <textarea type="text" class="message-input" placeholder="Type message..."></textarea>
+        <button type="submit" class="message-submit">Send</button>
+      </div> -->
+    </div>
+    </div>
+    <!--<div class="bg"></div>-->
+    <!-- <script src="https://cdn.botframework.com/botframework-webchat/latest/botchat.js"></script> -->
+    <script src="jquery-3.2.1.min.js"></script>
+    <script src="index_another.js"></script>    
+    <script src="index_working.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/conversation.js"></script>
+    <!-- <script src="js/payload.js"></script> -->
+    <script src="js/global.js"></script>
+</body>
+
+</html>
