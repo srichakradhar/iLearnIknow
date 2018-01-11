@@ -1,0 +1,133 @@
+#intro-links {
+  width: 100%;
+  height: 2000px;
+  background: url('../img/banner_2560.jpg') no-repeat center center;
+	background-size: cover;
+  position: relative;
+  visibility: hidden;
+}
+/*@media only screen and (max-width: 1920px) {
+  #intro-links {
+    background: url('/images/banner_1920.png') no-repeat center center;
+    background-size: cover;
+  }
+}
+@media only screen and (max-width: 1440px) {
+  #intro-links {
+    background: url('/images/banner_1440.png') no-repeat center center;
+    background-size: cover;
+  }
+}
+@media only screen and (max-width: 1280px) {
+  #intro-links {
+    background: url('/images/banner_1280.png') no-repeat center center;
+    background-size: cover;
+  }
+}
+@media only screen and (max-width: 1152px) {
+  #intro-links {
+    background: url('/images/banner_1152.png') no-repeat center center;
+    background-size: cover;
+  }
+}
+@media only screen and (max-width: 864px) {
+  #intro-links {
+    background: url('/images/banner_864.png') no-repeat center center;
+    background-size: cover;
+  }
+}
+@media only screen and (max-width: 768px) {
+  #intro-links {
+    background: url('/images/banner_768.png') no-repeat center center;
+    background-size: cover;
+  }
+}
+*/
+#intro-links h1 {
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  color: #FFFFFF;
+  font-family:CiscoSans,"Helvetica Neue",HelveticaNeue,Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-weight: 100;
+}
+#intro-text {
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  color: #FFFFFF;
+  font-family:CiscoSans,"Helvetica Neue",HelveticaNeue,Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-weight: 100;
+}
+.intro-link {
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  text-align: center;
+}
+.intro-link a {
+  color: #FFFFFF;
+}
+.intro-link a:hover {
+  color: #FF7700;
+  text-decoration: none;
+}
+.intro-link a:active {
+  color: #FF7700;
+  text-decoration: none;
+}
+.intro-link .popover {
+  max-width: none;
+  width: 400px;
+}
+.intro-link .popover img {
+  width: 142px;
+  float: left;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.modal-transparent {
+  background: transparent;
+}
+.modal-transparent .modal-content {
+  background: transparent;
+  border: 0;
+    -moz-border-radius: 0; -webkit-border-radius: 0; border-radius: 0;
+    -moz-box-shadow: none; -webkit-box-shadow: none; box-shadow: none;
+}
+.modal-backdrop.in {
+  opacity: 0.9 !important;
+}
+
+
+
+
+.modal-transparent .modal-body {
+    padding: 0 25px 25px 25px;
+}
+
+.modal-transparent .modal-header {
+    padding: 25px 25px 15px 25px;
+    text-align: right;
+}
+
+.modal-transparent .modal-header, .modal-transparent .modal-footer {
+    border: 0;
+}
+
+.modal-transparent .modal-header .close {
+    float: none;
+    margin: 0;
+    font-size: 36px;
+    color: #fff;
+    font-weight: 300;
+    text-shadow: none;
+    opacity: 1;
+}
+
+/*Deepti Additions*/
+/* Banner Intro Link Text */
+/*.intro-link-title{
+  font-size: 18px;
+}*/

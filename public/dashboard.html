@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <title>Bootstrap Example</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <link rel="stylesheet" href="css/styles.css">
+      <script src="./jquery-3.2.1.min.js"></script>
+      <script src="./js/bootstrap.min.js"></script>
+      <script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+      <script src="https://www.amcharts.com/lib/3/serial.js"></script>
+      <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
+      <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+      <script src="./js/amchart.js"></script>
+      <script src="./js/angular.min.js"></script>
+      <script src="./js/app.js"></script>
+    </head>
+  <style>
+       
+    </style>
+    <body ng-app="myApp">
+        
+                <nav class="navbar navbar-inverse">
+                  <div class="container-fluid" style="background-color: #355bd0;">
+                      <div class="navbar-header">
+                          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span> 
+                          </button>
+                          <a class="navbar-brand nav_brand_color" ><span ><img src="./img/logo_36x36.png" alt="icon"/></span>NETWORK OPERATION DASHBOARD</a>
+                      </div>
+                      <div class="collapse navbar-collapse" id="myNavbar">
+                      <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#"><span class="glyphicon glyphicon-search"></span> </a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-bell"></span> </a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span></a></li>
+                      </ul>
+                      </div>
+                 </div>
+               </nav>
+        
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8">
+                    <div class="row">
+                        <div class="col-sm-7">
+                            <div class="panel panel-primary height_fixed">
+                                <div class="panel-heading BGColor" >Alarm Details</div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <span class="side_icon"><img id="sml_img" src="./img/alarm.png"  alt="icon" /></span>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="small_font_ul AlarmDetai_dIV"> Metric</div>
+                                                    <hr class="spacingSize">
+                                                    <span class="small_font"><img class="sml_icon" src="./img/metric_36x36.png" alt="icon"/> CEI: Throughput</span>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="small_font_ul AlarmDetai_dIV">Revenue Impact</div>
+                                                    <hr class="spacingSize">
+                                                     <span class="small_font"><img class="sml_icon" src="./img/Revenue-Impact_36x36.png" alt="icon"/> $ 39002</span>
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="small_font_ul">Customers Impact</div>
+                                                    <hr class="spacingSize">
+
+                                                   <!--<p> <span class="glyphicon glyphicon-user"></span>148128</p>-->
+                                                    <span class="small_font"><img class="sml_icon" src="./img/Customers-Impacted_36x36.png" alt="icon"/> $148128</span>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="small_font_ul">Duration</div>
+                                                    <hr class="spacingSize">
+                                                 <!-- <p> <span class="glyphicon glyphicon-hourglass"></span>10 Hrs</p>-->
+                                                    <span class="small_font"><img class="sml_icon" src="./img/Duration_36x36.png" alt="icon"/> 10 Hrs</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                     <div class="row AlarmDetailsRow">
+                                    <h5><b>Description</b></h5>
+                                    <hr class="spacingSize small_font">
+                                    <p>CEI is Lower than expected. Actual:0.78 Expected:4.12;
+                                    <br>Cell Throughout is below 2 mbps which is predominance range of values:12 to 40 mbps</p>
+                                    </div>
+
+                                </div>
+                              </div>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="panel panel-primary height_fixed">
+                                <div class="panel-heading BGColor">Performance Mesure</div>
+                                <div class="panel-body" id="chartdiv">
+                                 <!-- <div id="chartdiv"></div>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-7">
+                            <div class="panel panel-primary height_fixed">
+                                <div class="panel-heading BGColor">Change Requests</div>
+                                <div class="panel-body table-responsive">
+                                  <table class="table changeRequestTablee">
+                                      <tr>
+                                        <th class="TableThBGcolor">Resource</th>
+                                        <th class="TableThBGcolor">Saverity</th>
+                                        <th class="TableThBGcolor">Date</th>
+                                        <th class="TableThBGcolor">Duration</th>
+                                        <th class="TableThBGcolor">Change Description</th>
+                                      </tr>
+                                      <tr>
+                                        <td class="changeRequestTable">Cell_28713</td>
+                                        <td class="changeRequestTable cr_td_bgColor"  ><span class=" glyphiconColor1 glyphicon glyphicon-stop"></span></td>
+                                        <td class="changeRequestTable">01/12/2017</td>
+                                        <td class="changeRequestTable">3Hours</td>
+                                        <td class="changeRequestTable">Cell service area changed</td>
+                                      </tr>
+                                      <tr>
+                                        <td class="changeRequestTable">Cell_28713</td>
+                                        <td class="changeRequestTable cr_td_bgColor"  ><span class="glyphiconColor2 glyphicon glyphicon-stop"></span></td>
+                                        <td class="changeRequestTable">01/12/2017</td>
+                                        <td class="changeRequestTable">3Hours</td>
+                                        <td class="changeRequestTable">Cell service area changed</td>
+                                      </tr> <tr>
+                                        <td class="changeRequestTable">Cell_28713</td>
+                                        <td class="changeRequestTable cr_td_bgColor"  ><span class="glyphiconColor3 glyphicon glyphicon-stop"></span></td>
+                                        <td class="changeRequestTable">01/12/2017</td>
+                                        <td class="changeRequestTable">3Hours</td>
+                                        <td class="changeRequestTable">Cell service area changed</td>
+                                      </tr> <tr>
+                                        <td class="changeRequestTable">Cell_28713</td>
+                                        <td class="changeRequestTable cr_td_bgColor"  ><span class=" glyphiconColor4 glyphicon glyphicon-stop"></span></td>
+                                        <td class="changeRequestTable">01/12/2017</td>
+                                        <td class="changeRequestTable">3Hours</td>
+                                        <td class="changeRequestTable">Cell service area changed</td>
+                                      </tr> 
+                                     
+
+
+                                  </table>
+
+
+                                </div>
+                             </div>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="panel panel-primary height_fixed">
+                                <div class="panel-heading BGColor">Trouble Ticket</div>
+                                <div class="panel-body">  
+                                    <div class="table-responsive">
+                                        <table class="table test">
+                                            <thead>
+                                              <tr class="TableThBGcolor">
+                                                <th class="tableHeading">ID</th>
+                                                <th class="tableHeading">Status</th>
+                                                <th class="tableHeading">Date</th>
+                                                <th class="tableHeading">Category</th>
+                                              </tr>
+                                            </thead>
+                                            <tbody>
+                                              <tr>
+                                                <td class="tableHeading">24795873</td>
+                                                <td class="tableHeading">Closed</td>
+                                                <td class="tableHeading">12/31/2012</td>
+                                                <td class="tableHeading">LTE</td>
+                                              </tr>
+                                                 <tr>
+                                                 <td class="tableTD" colspan="4">DESCRIPTION:General customers in the site area have called the customer care and reported 4G internet issue retaking to the download speeds.</td>
+                                              </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="table-responsive">
+                                         <table class="table test">
+                                            <thead>
+                                              <tr class="TableThBGcolor">
+                                                <th class="tableHeading">ID</th>
+                                                <th class="tableHeading">Status</th>
+                                                <th class="tableHeading">Date</th>
+                                                <th class="tableHeading">Category</th>
+                                              </tr>
+                                            </thead>
+                                            <tbody>
+                                              <tr>
+                                                <td class="tableHeading">24795873</td>
+                                                <td class="tableHeading">Closed</td>
+                                                <td class="tableHeading">12/31/2012</td>
+                                                <td class="tableHeading">LTE</td>
+                                              </tr>
+                                                 <tr>
+                                                 <td class="tableTD " colspan="4">DESCRIPTION:General customers in the site area have called the customer care and reported 4G internet issue retaking to the download speeds.</td>
+                                              </tr>
+
+                                            </tbody>
+                                      </table>
+                                   </div>     
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4"><!-- id="long_card"-->
+                    <div class="panel panel-primary"   id="accordion">
+                        <div class="panel-heading BGColor">Recommended Solution</div>
+                            <div class="panel-body">
+                                <div class="panel panel-default">
+                                <p class="card-text outline_border"><span class="p_heading">MBI knowledge based article #1234 93%</span><br/>Top Resolutiion Decreasing cell service area by parameters or antenna tlting for identified cell Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis psum dolor sit amet, consectetur adipiscing.
+                                     <span class="glyphicon glyphicon-file pull-right big_icon"></span>
+                                     <span class="glyphicon glyphicon-save-file pull-right big_icon"></span>
+                                </p>
+
+                                <p class="card-text outline_border"><span class="p_heading">MBI knowledge based article #1234 93%</span><br/>Top Resolutiion Decreasing cell service area by parameters or antenna tlting for identified cell Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis psum dolor sit amet, consectetur adipiscing.
+                                      <span class="glyphicon glyphicon-file pull-right"></span>
+                                     <span class="glyphicon glyphicon-save-file pull-right"></span></p>
+
+                                <p class="card-text outline_border"><span class="p_heading">MBI knowledge based article #1234 93%</span><br>Top Resolutiion Decreasing cell service area by parameters or antenna tlting for identified cell Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis psum dolor sit amet, consectetur adipiscing.
+                                <span class="glyphicon glyphicon-file pull-right"></span>
+                                <span class="glyphicon glyphicon-save-file pull-right"></span>
+                                </p>
+                                
+                                    
+                               <p class="card-text outline_border"><span class="p_heading">MBI knowledge based article #1234 93%</span><br>Top Resolutiion Decreasing cell service area by parameters or antenna tlting for identified cell Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis psum dolor sit amet, consectetur adipiscing.
+                               <span class="glyphicon glyphicon-file pull-right"></span>
+                               <span class="glyphicon glyphicon-save-file pull-right"></span>
+                                </p>
+                                 <h4 class="panel-title" data-toggle="collapse"   style="text-align: center;" ><span class="glyphicon glyphicon-chevron-down" style="color: #337ab7 !important;"></span></h4>
+                                </div> 
+                                <div class="panel-collapse collapse">   
+                                <p class="card-text outline_border"><span class="p_heading">MBI knowledge based article #1234 93%</span><br>Top Resolutiion Decreasing cell service area by parameters or antenna tlting for identified cell Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis psum dolor sit amet, consectetur adipiscing.
+                                <span class="glyphicon glyphicon-file pull-right"></span>
+                                <span class="glyphicon glyphicon-save-file pull-right"></span></p>
+                                <p class="card-text outline_border"><span class="p_heading">MBI knowledge based article #1234 93%</span><br>Top Resolutiion Decreasing cell service area by parameters or antenna tlting for identified cell Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis psum dolor sit amet, consectetur adipiscing.
+                                <span class="glyphicon glyphicon-file pull-right"></span>
+                                <span class="glyphicon glyphicon-save-file pull-right"></span></p>
+                                </div>
+
+
+                         </div>     
+                    </div>
+                </div>
+            </div>
+           
+             <div class="panel chat_window margin_bottom_0">     
+              
+                  <nav class="navbar navbar-inverse margin_bottom_0">
+                          <div class="container-fluid" style="background-color: #355bd0;">
+                            <div class="navbar-header">
+                              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span> 
+                              </button>
+                                <a class="navbar-brand nav_brand_color"  >CHATBOT</a>
+                            </div>
+                            <div class="collapse navbar-collapse" id="myNavbar">
+                            <!--<ul class="nav navbar-nav">
+                                  <li class="active"><a href="#" style="background-color: #355bd0;"><span ></span>CHATBOT</a></li>
+                            </ul>-->
+                            <ul class="nav navbar-nav navbar-right">
+                              <li><a href="#"><span class="glyphicon glyphicon-cog"></span> </a></li>
+                              <li><a href="#"><span class="glyphicon glyphicon-info-sign"></span> </a></li>
+                              <li><a href="#"><span class="glyphicon glyphicon-calendar"></span></a></li>
+                              <li><a href="#"><span class="glyphicon glyphicon-minus" id="ExpandBotton"></span></a></li>
+                            </ul>
+                            </div>
+                          </div>
+                    </nav>
+                <!-- chatbotcodeDiv-->
+                <div class="panel-body" id="card_display" style="display:none;" ng-controller="myCtrl">
+                    <div class="row">
+                        <div class="col-xs-12" style="max-height:300px;max-width:100%;overflow-y:auto;overflow-x:hidden;">
+                            <table class="table table-hover table-condensed" style="margin-left:80px;">
+                              <tr ng-hide="chatMessages.length === 0" ng-repeat="chat in chatMessages | orderBy:origDt"
+                                  style="min-width:100%;max-width:100%;width:100%;">
+                                <td><img src="./img/user_icon.png" alt="icon missing"/>
+                                    <p class="word-wrap:break-word display_inline">{{chat.text}}</p>
+                                    <span class="word-wrap:break-word"><small>{{chat.origDt}}</small></span>
+                                    <h6>{{chat.username}}</h6>
+                                
+                                
+                                
+                                </td>
+                              </tr>
+                              <tr ng-show="chatMessages.length === 0">
+                                <td>
+                                  <p>Nothin' here. <strong>Say something!</strong></p>
+                                </td>
+                              </tr>
+                            </table>
+                            
+                            
+                            <table class="table table-hover table-condensed" style="margin-right:80px;">
+                              <tr ng-hide="chatReplyMessages.length === 0" ng-repeat="chatR in chatReplyMessages | orderBy:origDt"
+                                  style="min-width:100%;max-width:100%;width:100%;">
+                                <td><img src="./img/user_reply_icon.png" alt="icon missing"/>
+                                    <p class="word-wrap:break-word display_inline">{{chatR.text}}</p>
+                                    <span class="word-wrap:break-word"><small>{{chatR.origDt}}</small></span>
+                                    <h6>{{chatR.username}}</h6>
+                                
+                                
+                                
+                                </td>
+                              </tr>
+                              
+                            </table>
+                            
+                        </div>
+                    </div>
+                    <div class="chat_footer">
+                        <div class="input-group" style="width:100%; position:absolute; bottom:0;">
+                            <input class="chat_input" type="text" ng-model="newChatMsg" ng-enter="addChat()"  placeholder="Write your message here..." />
+
+                            <button type="button" class="btn btn-info btn-circle" ng-click="addChat()"><i class="glyphicon glyphicon-ok"></i></button>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- end-->
+            </div> 
+            
+            
+        </div>
+        <script>
+            $("#ExpandBotton").click(function(){
+                $("#card_display").slideToggle();
+            });
+
+           /* function scrollToElementD(){
+                var topPos = document.getElementById('inner-element').offsetTop;
+                document.getElementById('long_card').scrollTop = topPos;
+
+               // document.getElementById('scroll_button').style.display="none";
+            };*/
+            $('#accordion .panel-default').on('click', function () {
+           $('#accordion .panel-collapse').collapse('toggle');
+           });
+    
+        </script>
+    </body>
+</html>

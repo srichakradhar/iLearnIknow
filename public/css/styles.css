@@ -1,0 +1,243 @@
+body {
+    font-size: 12px !important;
+}
+   /* p {
+        font-size: 1.2rem !important;
+    }*/
+    h5 {
+        line-height: 0.5 !important;
+    
+    }
+    .margin_top_20{
+        margin-top: 20px;
+    }
+  .height_fixed {
+        height: 327px !important;
+        width: 105% !important;
+    }
+    #long_card {
+        height:730px !important;
+        overflow:auto;
+    }
+    .chat_window {
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        width: 400px;
+        border: 2px solid #ccc;
+        /*background-color: azure !important;*/
+    }
+    .btn_chat_send {
+        width: 45px !important;
+        line-height: 2.0 !important;
+    }
+    input:focus {
+      /* Safari */
+      outline: 2px solid #b5b5b5;
+      border: 2px solid #b5b5b5;
+    }
+    input::-moz-selection {
+      /* Firefox */
+      outline: 2px solid #b5b5b5;
+      border: 2px solid #b5b5b5;
+    }
+
+
+.margin_bottom_0 {
+    margin-bottom: 0px !important;
+}
+
+
+.BGColor{
+       background-color:#b3d9ff !important;
+       color:black !important;
+
+      }
+    .Box{
+        border: 1px solid gray;
+        padding: 1px;
+        text-align: justify;
+      }
+
+    .outline_border {
+        border: 1px solid rgba(0,0,0,.125);
+        padding: 10px;
+      }
+    .p_heading {                                                                    
+        font-weight: bold;
+      }
+     
+
+    .small_font_ul {
+        font-size: 1.2rem !important;
+        padding-top: 1px;
+
+     }
+    .small_font {
+        font-size: 1.2rem !important;
+    }
+    .side_icon {
+        padding: 10px;
+        position:absolute;
+
+    }
+    .tableHeading{
+        border: 1px solid #ddd;
+        border-collapse: collapse;
+        text-align:center;
+               /* background-color: #ccc;*/
+    }
+    .tableTD {
+        border: 1px solid #ddd;
+        border-collapse: collapse;
+
+    }
+
+    .test>tbody>tr:last-child { 
+        text-align:left !important; 
+    }
+
+    .TableThBGcolor{
+        background-color: #ccc;
+    }
+     .glyphicon-hourglass ,.glyphicon-file,.glyphicon-save-file, .glyphicon-user {color:deepskyblue!important;}
+
+    .spacingSize{    
+        margin-top: 5px !important;
+        margin-bottom: 5px !important;
+        border: 1px solid #ddd;
+    }
+    #chartdiv {
+        height: 278px;
+        }
+    .panel-body {
+        padding: 3px !important;
+        }
+    .changeRequestTable {
+        border: 1px solid #ccc !important;
+        margin:2% !important;
+        } 
+    .changeRequestTablee{
+        border-spacing: 2px !important;
+        border-collapse: separate !important;
+        }
+    .chat_input {
+       width: 98% !important;
+        border-radius: 1rem;
+        padding-left: 8px;
+        height: 40px;
+        margin-bottom: 5px;
+    }
+    .chat_button {
+        position: absolute;
+        right:0px;
+    }
+     #card_display {
+        height:300px;
+    }
+.big_icon {
+    font-size: 1.5rem !important;
+}
+.table{
+        margin-bottom: 7px !important;
+}
+.panel-primary {
+    border-color: #ccc;
+}
+
+.panel-title:hover {
+     cursor: pointer;
+}
+.AlarmDetailsRow{
+    margin-left: 0px;
+    margin-right: 0px;
+}
+.display_inline {
+    display:inline-block;
+    margin-left: 30px;
+}
+.btn-circle {
+    width: 35px;
+    height: 35px;
+    background-color: #355bd0;
+    text-align: center;
+    padding: 10px 10px;
+    font-size: 13px;
+    line-height: 1.428571;
+    border-radius: 20px;
+    position: absolute;
+    right: 20px;
+    top: 3px;
+}
+.nav_brand_color{
+    color:white !important;
+}
+.glyphicon.glyphicon-stop {
+    font-size: 35px;
+}
+.cr_td_bgColor{
+     background-color: white; 
+    width: 4em; 
+    text-align:center
+}   
+.glyphiconColor1 {
+    color:red !important;
+    
+}
+.glyphiconColor2 {
+    color:orange!important;
+    
+}
+.glyphiconColor3 {
+    color:green!important;
+    
+}
+.glyphiconColor4 {
+    color:skyblue!important;
+    
+}
+
+
+@media screen and (max-width: 999px) and (min-width: 520px) {
+    body {
+        font-size: 0.8rem !important;
+      
+    }
+    #sml_img {
+       /* padding: 10px;*/
+        /*position:absolute;*/
+        font-size: 0.8rem !important;
+        padding-top: 1px;
+       /* width: 60px;;*/
+        width: 18%;
+    }
+    .small_font_ul {
+        font-size: 0.8rem !important;
+        padding-top: 1px;
+
+     }
+    .small_font {
+        font-size: 0.8rem !important;
+    }
+    h5 {
+        font-size: 1.0rem !important;
+        line-height: 0.3 !important;
+    }
+    .sml_icon {
+        width:25px !important;
+    }
+    .chat_window {
+        width: 350px !important;
+    }
+    .height_fixed {
+       /* height: 327px !important;*/
+        width: 100% !important;
+    }
+    .p{
+     font-size: 1.2rem !important; 
+    }
+    .AlarmDetai_dIV{
+            min-height: 27px;
+    }
+    
+}

@@ -31,8 +31,8 @@ app.use(bodyParser.json());
 var conversation = new Conversation({
   // If unspecified here, the CONVERSATION_USERNAME and CONVERSATION_PASSWORD env properties will be checked
   // After that, the SDK will fall back to the bluemix-provided VCAP_SERVICES environment property
-  // 'username': process.env.CONVERSATION_USERNAME,
-  // 'password': process.env.CONVERSATION_PASSWORD,
+  'username': process.env.CONVERSATION_USERNAME,
+  'password': process.env.CONVERSATION_PASSWORD,
   'version_date': '2017-05-26'
 });
 
@@ -100,13 +100,21 @@ function updateMessage(input, response) {
       responseText = 'I think your intent was ' + intent.intent;
       switch(intent.intent){
 
-        case 'UnsupportedFeatures':
+        case 'unSupportedSoftwareFeatureOf':
+
+          dialog_response = JSON.parse(response.output.text[0]);
+          aggregation_query = "nested(enriched_text.entities)";
+          for(let entity of dialog_response.identified_intent){
+            aggregation_query += ".filter(enriched_text.entities.type::" + entity + ")";
+          }
+          aggregation_query += ".term(enriched_text.entities.text,count:20)";
 
           discovery.query({ environment_id: process.env.DISCOVERY_ENVIRONMENT_ID,
             collection_id: process.env.DISCOVERY_COLLECTION_ID,
             configuration_id: process.env.DISCOVERY_CONFIGURATION_ID,
             query: "text: \"features\"",
-            aggregation: "nested(enriched_text.entities).filter(enriched_text.entities.type::UNSUPPORT_SOFWARE_FEATURES).term(enriched_text.entities.text,count:20)",
+            // aggregation: "nested(enriched_text.entities).filter(enriched_text.entities.type::UNSUPPORT_SOFWARE_FEATURES).term(enriched_text.entities.text,count:20)",
+            aggregation: aggregation_query,
             // return: 'text',
             passages: true,
             highlight: true
