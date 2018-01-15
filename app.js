@@ -84,70 +84,58 @@ app.post('/api/message', function(req, res) {
 function updateMessage(input, response) {
   var responseText = null;
   var discovery_response = null;
+  var count = 0;
+
   if (!response.output) {
-    response.output = {};
-  }else if (response.intents && response.intents[0]) {
-    var intent = response.intents[0];
-    // Depending on the confidence of the response the app can return different messages.
-    // The confidence will vary depending on how well the system is trained. The service will always try to assign
-    // a class/intent to the input. If the confidence is low, then it suggests the service is unsure of the
-    // user's intent . In these cases it is usually best to return a disambiguation message
-    // ('I did not understand your intent, please rephrase your question', etc..)
-    // if (intent.confidence >= 0.75) {
-    //   responseText = 'I understood your intent was ' + intent.intent;
-    // } else
-    if (intent.confidence >= 0.5) {
-      responseText = 'I think your intent was ' + intent.intent;
-      switch(intent.intent){
-
-        case 'unSupportedSoftwareFeatureOf':
-
-          dialog_response = JSON.parse(response.output.text[0]);
-          aggregation_query = "nested(enriched_text.entities)";
-          for(let entity of dialog_response.identified_intent){
-            aggregation_query += ".filter(enriched_text.entities.type::" + entity + ")";
-          }
-          aggregation_query += ".term(enriched_text.entities.text,count:20)";
-
-          discovery.query({ environment_id: process.env.DISCOVERY_ENVIRONMENT_ID,
-            collection_id: process.env.DISCOVERY_COLLECTION_ID,
-            configuration_id: process.env.DISCOVERY_CONFIGURATION_ID,
-            query: "text: \"features\"",
-            // aggregation: "nested(enriched_text.entities).filter(enriched_text.entities.type::UNSUPPORT_SOFWARE_FEATURES).term(enriched_text.entities.text,count:20)",
-            aggregation: aggregation_query,
-            // return: 'text',
-            passages: true,
-            highlight: true
-            },
-            function(error, data) {
-              // console.log(JSON.stringify(data, null, 2));
-              var keys = [];
-              for(let item of data.aggregations[0].aggregations[0].aggregations[0].results){
-                keys = keys.concat("• " + item.key);
-              }
-              discovery_response = keys;
-              // var passage_results = [];
-              // for(let passage of data.passages){
-              //   passage_results = passage_results.concat(passage.passage_text);
-              // }
-              // discovery_response = passage_results;
-          });
-
-          while(discovery_response === null) {
-            deasync.runLoopOnce();
-          }
-
-          responseText = discovery_response;
-          break;
-          
-        default:
-            responseText = response.output.text;
-      }
-    } else {
-      responseText = 'I did not understand your intent';
-    }
+    response.output = {text: 'Sorry. I couldn\'t understand that. Please try again.'};
   }else{
-    responseText = response.output.text;
+
+    try{
+      var identified_response = JSON.parse(response.output.text[0]);
+      var identified_intents = identified_response.identified_intent;
+      var aggregation_query = "nested(enriched_text.entities)";
+      
+      for(let entity of identified_intents){
+        aggregation_query += ".filter(enriched_text.entities.type::" + entity.toUpperCase() + ")";
+      }
+      aggregation_query += ".term(enriched_text.entities.text,count:20)";
+
+      discovery.query({ environment_id: process.env.DISCOVERY_ENVIRONMENT_ID,
+        collection_id: process.env.DISCOVERY_COLLECTION_ID,
+        configuration_id: process.env.DISCOVERY_CONFIGURATION_ID,
+        query: "text: \"" + response.input.text + '"',
+        // aggregation: "nested(enriched_text.entities).filter(enriched_text.entities.type::UNSUPPORT_HARDWARE_FEATURES).term(enriched_text.entities.text,count:20)",
+        aggregation: aggregation_query,
+        // return: 'text',
+        passages: true,
+        highlight: true
+        },
+        function(error, data) {
+          // console.log(JSON.stringify(data, null, 2));
+          var keys = [];
+          var intermediate_response = [];
+          var results = data.aggregations[0].aggregations[0].aggregations[0].results;
+
+          if(results !== undefined && results.length > 0){
+            for(let item of results){
+              keys = keys.concat("• " + item.key);
+            }
+            intermediate_response = keys
+          }
+          
+          for(let passage of data.passages){
+            intermediate_response = intermediate_response.concat(passage.passage_text);
+          }
+
+          discovery_response = intermediate_response;
+      });
+
+      deasync.loopWhile(function(){return discovery_response === null});
+      responseText = discovery_response;
+    }catch(err){
+      responseText = response.output.text;
+    }
+    
   }
 
   response.output.text = responseText;
