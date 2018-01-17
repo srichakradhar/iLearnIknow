@@ -9,12 +9,24 @@ $(function() {
     
     $("#chat-circle").click(function() {    
       $("#chat-circle").toggle('scale');
+      $('.avenue-messenger').height('75%');
       $(".chat-box").toggle('scale');
     })
     
-    $(".chat-box-toggle").click(function() {
+    $("#end-chat, .chat-box-toggle").click(function() {
       $("#chat-circle").toggle('scale');
       $(".chat-box").toggle('scale');
-    })
-    
-  })
+      $('.menu .items span').toggleClass('active');
+      $('.menu .button').toggleClass('active');
+    });
+
+    $("#minimize").click(function() {
+      $('.avenue-messenger').height('10%');
+      $('.menu .items span').toggleClass('active');
+      $('.menu .button').toggleClass('active');
+    });
+
+    $(".chat").click(function() {
+      $('.avenue-messenger').height('75%');
+    });
+});

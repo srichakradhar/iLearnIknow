@@ -82,28 +82,44 @@ app.post('/api/message', function(req, res) {
  * @return {Object}          The response with the updated message
  */
 function updateMessage(input, response) {
-  var responseText = null;
+  var responseText = "";
   var discovery_response = null;
   var count = 0;
+  var entities_map = {"UNSUPPORT_SOFWARE_FEATURES": "Unsupported Software Features",
+                      "UNSUPPORT_HARWARE_FEATURES": "Unsupported Hardware Features",
+                      "SOFTWARE_FEATURE": "Software Features",
+                      "HARDWARE_FEATURE": "Hardware Features"
+                      }
 
   if (!response.output) {
     response.output = {text: 'Sorry. I couldn\'t understand that. Please try again.'};
   }else{
-
     try{
       var identified_response = JSON.parse(response.output.text[0]);
+
+      // for(let response_data of response.output.text){
+      //   identified_response = JSON.parse(response_data);
+      // }
       var identified_intents = identified_response.identified_intent;
-      var aggregation_query = "nested(enriched_text.entities)";
+      var aggregation_query = "[";
+      var entities_headings = [];
       
       for(let entity of identified_intents){
-        aggregation_query += ".filter(enriched_text.entities.type::" + entity.toUpperCase() + ")";
+        aggregation_query += "nested(enriched_text.entities).filter(enriched_text.entities.type::\"" + entity.toUpperCase() + "\").term(enriched_text.entities.text,count:10),";
+        var correct_entity = entities_map[entity];
+        if(correct_entity == undefined){
+          correct_entity = toTitleCase(entity);
+        }
+        entities_headings = entities_headings.concat(correct_entity);
       }
-      aggregation_query += ".term(enriched_text.entities.text,count:20)";
+      aggregation_query = aggregation_query.substr(0,aggregation_query.length - 1) + "]";
+      // var entities_string = entities_headings.join(", ")
 
       discovery.query({ environment_id: process.env.DISCOVERY_ENVIRONMENT_ID,
         collection_id: process.env.DISCOVERY_COLLECTION_ID,
         configuration_id: process.env.DISCOVERY_CONFIGURATION_ID,
-        query: "text: \"" + response.input.text + '"',
+        // query: "text: \"" + response.entities[0].text + '"',
+        natural_language_query: "text: \"" + response.input.text + '"',
         // aggregation: "nested(enriched_text.entities).filter(enriched_text.entities.type::UNSUPPORT_HARDWARE_FEATURES).term(enriched_text.entities.text,count:20)",
         aggregation: aggregation_query,
         // return: 'text',
@@ -112,34 +128,81 @@ function updateMessage(input, response) {
         },
         function(error, data) {
           // console.log(JSON.stringify(data, null, 2));
-          var keys = [];
           var intermediate_response = [];
-          var results = data.aggregations[0].aggregations[0].aggregations[0].results;
-
-          if(results !== undefined && results.length > 0){
-            for(let item of results){
-              keys = keys.concat("• " + item.key);
+          // var results = data.aggregations[0].aggregations[0].aggregations[0].results;
+          var results = [];
+          for(var index = 0; index < data.aggregations.length; index++){
+            var keys = [];
+            results = data.aggregations[index].aggregations[0].aggregations[0].results;
+            if(results !== undefined && results.length > 0){
+              for(let item of results){
+                keys = keys.concat("• " + item.key);
+              }
+              intermediate_response = intermediate_response.concat(entities_headings[index] + ":<br>")
+              intermediate_response = intermediate_response.concat(keys)
             }
-            intermediate_response = keys
           }
-          
-          for(let passage of data.passages){
-            intermediate_response = intermediate_response.concat(passage.passage_text);
-          }
+          // if (data.passages.length > 0) {
+          //   intermediate_response = intermediate_response.concat("Search Results:");
+          // }
+          // for(let passage of data.passages){
+          //   intermediate_response = intermediate_response.concat(passage.passage_text);
+          // }
+          // discovery_response = intermediate_response;
+          // intermediate_response = entities_headings.concat(intermediate_response)
 
-          discovery_response = intermediate_response;
+          if (intermediate_response.length ==  0) {
+            discovery.query({ environment_id: process.env.DISCOVERY_ENVIRONMENT_ID,
+              collection_id: process.env.DISCOVERY_COLLECTION_ID,
+              configuration_id: process.env.DISCOVERY_CONFIGURATION_ID,
+              // query: "text: \"" + response.entities[0].value + '"',
+              natural_language_query: "text: \"" + response.input.text + '"',
+              // return: 'text',
+              passages: true,
+              highlight: true
+              },
+              function(error, data) {
+                if (data.passages.length > 0) {
+                  // intermediate_response = intermediate_response.concat("Search Results:");
+                }else{
+                  intermediate_response = "Sorry.. We are not able to find any results. Try again."
+                }
+                for(let passage of data.passages){
+                  intermediate_response = intermediate_response.concat(passage.passage_text);
+                }
+                discovery_response = intermediate_response;
+              });
+          }else{
+            discovery_response = intermediate_response;
+          }
       });
 
       deasync.loopWhile(function(){return discovery_response === null});
       responseText = discovery_response;
     }catch(err){
-      responseText = response.output.text;
+      // for(let response_data of response.output.text){
+      //   try{
+      //     JSON.parse(response_data);
+      //   }catch(err){
+      //     responseText = response_data;
+      //   }
+      // }
+      responseText = response.output.text[0];
     }
     
   }
-
+  if (responseText.length == 0) {
+    responseText += "Sorry.. We are not able to find any result. Please try again."
+  }
   response.output.text = responseText;
   return response;
+}
+
+function toTitleCase(str) {
+    str = str.toLowerCase();
+    return str.replace(/(?:^|_)\w/g, function(match) {
+    return match.toUpperCase().replace(/_/g, ' ');
+  });
 }
 
 module.exports = app;

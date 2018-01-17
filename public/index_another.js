@@ -83,3 +83,12 @@ $('.button').click(function(){
   $('.menu .items span').toggleClass('active');
    $('.menu .button').toggleClass('active');
 });
+
+// $( "#textInput" ).on('input', function (e) {
+//   $('#loader').removeClass('hide');
+// });
+
+$( "#scrollingChat" ).bind("DOMSubtreeModified", function() {
+  $('#loader').addClass('hide');
+  $("#textInput").attr("disabled", false);
+});

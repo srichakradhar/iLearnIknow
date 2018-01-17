@@ -223,6 +223,8 @@ var ConversationPanel = (function() {
       // Clear input box for further messages
       inputBox.value = '';
       Common.fireEvent(inputBox, 'input');
+      $("#textInput").attr("disabled", true);
+      $('#loader').removeClass('hide');
     }
   }
 }());
