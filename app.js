@@ -88,7 +88,9 @@ function updateMessage(input, response) {
   var entities_map = {"UNSUPPORT_SOFWARE_FEATURES": "Unsupported Software Features",
                       "UNSUPPORT_HARWARE_FEATURES": "Unsupported Hardware Features",
                       "SOFTWARE_FEATURE": "Software Features",
-                      "HARDWARE_FEATURE": "Hardware Features"
+                      "HARDWARE_FEATURE": "Hardware Features",
+                      "LIMITATION_HARDWARE": "Hardware Limitations",
+                      "LIMITATION_SOFTWARE": "Software Limitations"
                       }
 
   if (!response.output) {
@@ -103,8 +105,10 @@ function updateMessage(input, response) {
       var identified_intents = identified_response.identified_intent;
       var aggregation_query = "[";
       var entities_headings = [];
+      var entity = "";
       
-      for(let entity of identified_intents){
+      for(let raw_entity of identified_intents){
+        entity = raw_entity.trim();
         aggregation_query += "nested(enriched_text.entities).filter(enriched_text.entities.type::\"" + entity.toUpperCase() + "\").term(enriched_text.entities.text,count:10),";
         var correct_entity = entities_map[entity];
         if(correct_entity == undefined){

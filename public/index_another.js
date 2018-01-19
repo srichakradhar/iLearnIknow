@@ -91,4 +91,10 @@ $('.button').click(function(){
 $( "#scrollingChat" ).bind("DOMSubtreeModified", function() {
   $('#loader').addClass('hide');
   $("#textInput").attr("disabled", false);
+  $("#textInput").focus();
+});
+
+$('form').submit(function(e){
+  e.preventDefault();
+  
 });

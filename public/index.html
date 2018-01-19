@@ -23,11 +23,25 @@
     <p>Customer handling chatbot</p>
   </div> -->
 
-  <div id="chat-circle" class="btn btn-raised">
+  <!-- <div id="chat-circle" class="btn btn-raised">
     <div id="chat-overlay"></div>
     <i class="material-icons">chat</i>
-  </div>
+  </div> -->
 
+  <div id="chat-circle" class="btn btn-raised" >
+    <div id="chat-overlay"></div>
+    <img src="../img/chatbot_108x108.png" style="
+    position: absolute;
+    top: -17%;
+    left: -15%;
+    ">  
+    <img src="../img/ChatButton.png" style="
+      position: absolute;
+      top: 20%;
+      left: 17%;
+      width: 65%;
+    ">
+  </div>
   <!--
   Inspired by https://dribbble.com/supahfunk
   -->
@@ -62,22 +76,36 @@
           <!--  <figure class="avatar">
               <img src="http://askavenue.com/img/17.jpg" /></figure>-->
         </div>
-        <div id="loader" class="loading-mask loading-mask--picture hide"></div>
+        <div id="loader" class="typing-indicator hide">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
         <div class="messages">
           <div class="messages-content">
-            <div id="contentParent" class="responsive-columns-wrapper">
-              <div id="chat-column-holder" class="responsive-column content-column">
-                <div class="chat-column">
-                  <div id="scrollingChat">
-                  </div>
+            <div class="chat-column">
+              <div id="scrollingChat">
+              </div>
+              <div class="chat-input">
+              <form>
+                <div id="chat-input">
                   <label for="textInput" class="inputOutline">
                     <input id="textInput" class="input responsive-column"
                       placeholder="Type something" type="text"
-                      onkeydown="ConversationPanel.inputKeyDown(event, this)">
+                      onkeydown="ConversationPanel.inputKeyDown(event, this)"
+                      style="width:100%">
                   </label>
+                  <button type="submit" class="chat-submit" id="chat-submit">
+                    <i class="material-icons">send</i>
+                  </button>
                 </div>
-              </div>
+              </form>
             </div>
+            <!-- <div id="contentParent" class="responsive-columns-wrapper">
+              <div id="chat-column-holder" class="responsive-column content-column">
+                
+              </div>
+            </div> -->
           </div>
           <!-- <div id="bot"/> -->
         </div>

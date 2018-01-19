@@ -53,19 +53,24 @@ Chat
     left: 50%;
     transform: translate(-50%, -50%);*/
   width: 100%;
-  height: calc(100% - 15px);
+  height: 100%;
+  /* height: calc(100% - 65px); */
   /* max-height: 500px; */
   z-index: 10;
   overflow: hidden;
   /*box-shadow: 0 5px 30px rgba(0, 0, 0, .2);*/
   /* background: rgba(0, 0, 0, .5);*/
   background: transparent;
-  border-radius: 20px;
-  -webkit-border-radius: 20px;
-  -moz-border-radius: 20px;
+  border-radius: 12px;
+  -webkit-border-radius: 12px;
+  -moz-border-radius: 12px;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
+  margin-bottom: 40px;
+  border-right: solid #01bcce;
+  border-left: solid #029aea;
+  border-bottom: solid #03a8df;
 }
 
 /*--------------------
@@ -80,7 +85,8 @@ Chat Title
   color: #777;
   padding-top: 20px;
   padding-bottom: 5px;
-  background-color: #58b051;
+  /* background-color: #58b051; */
+  background: linear-gradient(-141deg, #05bfcb 0%, #04b3d6 51%, #029aea 75%);
   /* text-transform: uppercase; */
   text-align: center;
 }
@@ -603,7 +609,7 @@ box-shadow: 0px 0px 10px rgba(0,0,0,.8);*/
 }
 
 .menu .button.active {
-  background: #58b051;
+  background: #06bdcd;
 }
 
 /*
@@ -697,9 +703,11 @@ iframe {
 
 .loading-mask {
   position: absolute;
-  top: 0;
+  width: 100px;
+  height: 70px;
+  /* top: 80%; */
   right: 0;
-  bottom: 0;
+  bottom: 10%;
   left: 0;
   z-index: 1;
 }
@@ -766,3 +774,117 @@ background-image: url('http://flaticons.net/gd/makefg.php?i=icons/Brand%20Identi
 
 /* TATA LOGO: http://flaticons.net/gd/makefg.php?i=icons/Brand%20Identity/TATA-02.png&r=255&g=255&b=255 */
 /* TCS LOGO: http://flaticons.net/gd/makefg.php?i=icons/Brand%20Identity/TATA-01.png&r=0&g=102&b=255 */
+
+.typing-indicator {
+  background: linear-gradient(-141deg, #05bfcb 0%, #04b3d6 51%, #029aea 75%);
+  will-change: transform;
+  width: auto;
+  border-radius: 50px;
+  padding: 20px;
+  display: table;
+  margin: 0 auto;
+  position: relative;
+  animation: 2s bulge infinite ease-out;
+  position: absolute;
+  /* top: 80%; */
+  /* right: 0; */
+  bottom: 10%;
+  left: 20px;
+  z-index: 1;
+}
+.typing-indicator::before, .typing-indicator::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: -2px;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background-color: #029aea;
+}
+.typing-indicator::after {
+  height: 10px;
+  width: 10px;
+  left: -10px;
+  bottom: -10px;
+}
+.typing-indicator span {
+  height: 15px;
+  width: 15px;
+  float: left;
+  margin: 0 1px;
+  background-color: white;
+  display: block;
+  border-radius: 50%;
+  opacity: 0.4;
+}
+.typing-indicator span:nth-of-type(1) {
+  animation: 1s blink infinite 0.3333s;
+}
+.typing-indicator span:nth-of-type(2) {
+  animation: 1s blink infinite 0.6666s;
+}
+.typing-indicator span:nth-of-type(3) {
+  animation: 1s blink infinite 0.9999s;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 1;
+  }
+}
+@keyframes bulge {
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+#scrollingChat::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+}
+
+#scrollingChat::-webkit-scrollbar
+{
+	width: 5px;  
+	background-color: #F5F5F5;
+}
+
+#scrollingChat::-webkit-scrollbar-thumb
+{
+	background-color: #01bdcd75;
+}
+
+#chat-input {
+  background: #f4f7f9;
+  width: 100%;
+  position: relative;
+  height: 47px;
+  padding-top: 4px;
+  padding-right: 50px;
+  padding-bottom: 10px;
+  padding-left: 15px;
+  border: none;
+  resize: none;
+  outline: none;
+  border: 1px solid #ccc;
+  color: #888;
+  border-top: none;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  overflow: hidden;
+}
+
+.chat-submit {
+  position: absolute;
+  bottom: 3px;
+  right: 20px;
+  background: transparent;
+  box-shadow: none;
+  border: none;
+  border-radius: 50%;
+  color: #5A5EB9;
+  width: 35px;
+  height: 35px;
+}
