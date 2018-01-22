@@ -224,7 +224,9 @@ var ConversationPanel = (function() {
       inputBox.value = '';
       Common.fireEvent(inputBox, 'input');
       $("#textInput").attr("disabled", true);
+      $('#scrollingChat').append('<div id="loader" class="hide"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>');
       $('#loader').removeClass('hide');
+      $('#scrollingChat').scrollTop($('#scrollingChat').prop("scrollHeight"));
     }
   }
 }());

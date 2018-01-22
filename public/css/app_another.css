@@ -113,6 +113,7 @@ div {
 
 .from-user {
   text-align: right;
+  padding-right: 50px;
 }
 
 .from-user .message-inner {
@@ -170,6 +171,8 @@ div {
   color: #B5B5B5;
   letter-spacing: 0.015rem;
   line-height: 1.3125rem;
+  margin-left: 50px;
+  padding-top: 5px;
 }
 
 .from-watson.latest .message-inner {
@@ -481,3 +484,4 @@ html{
 
     transition-timing-function: linear;
 }*/
+

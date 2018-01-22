@@ -89,12 +89,19 @@ $('.button').click(function(){
 // });
 
 $( "#scrollingChat" ).bind("DOMSubtreeModified", function() {
-  $('#loader').addClass('hide');
-  $("#textInput").attr("disabled", false);
-  $("#textInput").focus();
+  var l = $( "#scrollingChat" ).find('div').length;
+  console.log($( "#scrollingChat" ).find('div')[l-1]);
+  if($($($( "#scrollingChat" ).find('div')[l-1])[0].parentNode).hasClass('from-watson')){
+    $('#loader').addClass('hide');
+    $("#textInput").attr("disabled", false);
+    $("#textInput").focus();
+    $( "#scrollingChat" ).find('#loader').remove();
+  }
 });
 
 $('form').submit(function(e){
   e.preventDefault();
-  
+  var evt = jQuery.Event("keydown");
+  evt.keyCode = 13;
+  $("#textInput").trigger(evt);
 });
