@@ -927,22 +927,25 @@ div#loader .dot:nth-child(3) {
   outline: none;
 }
 
-.from-watson::before {
-  content: '';
-  background: url(./img/answer-icon50x50.png);
-  height: 45px;
-  width: 50px;
+.from-watson p::before {
+  content: "";
+  background-image: url(../img/answer-icon50x50.png);
+  /* background-size: 0.3125rem 1.3125rem; */
   position: absolute;
-  z-index: 1;
+  z-index: 2;
+  left: -50px;
+  width: 50px;
+  height: 50px;
+  line-height: 1.3125rem;
 }
 
-.from-user::after {
+.from-user p::before {
   content: '';
   background: url(./img/person-40.png);
   height: 40px;
   width: 40px;
   position: absolute;
   z-index: 1;
-  margin-left: 5px;
-  margin-top: 4px;
+  right: -45px;
+  margin-top: 0px;
 }

@@ -137,6 +137,7 @@ div {
 .from-user .message-inner p {
   margin: 0.3125rem;
   padding: 0 0.9375rem;
+  direction: rtl;
 }
 
 .from-user .message-inner:before, .from-user .message-inner:after {
@@ -195,10 +196,9 @@ div {
   border: solid darkgray 1px;
 }
 
-.from-watson.latest.top p:before {
-  /* content: "."; */
-  color: #9855D4;
-  
+/* .from-watson.latest.top p:before {
+  content: "";
+  color: #9855D4;  
   background-image: url("../img/marker_image.png");
   background-size: 0.3125rem 1.3125rem;
   position: absolute;
@@ -206,6 +206,17 @@ div {
   left: 0.4375rem;
   width: 0.3125rem;
   height: 1.3125rem;
+  line-height: 1.3125rem;
+} */
+.from-watson.latest.top p:before {
+  content: "";
+  background-image: url(../img/answer-icon50x50.png);
+  /* background-size: 0.3125rem 1.3125rem; */
+  position: absolute;
+  z-index: 2;
+  left: -50px;
+  width: 50px;
+  height: 50px;
   line-height: 1.3125rem;
 }
 

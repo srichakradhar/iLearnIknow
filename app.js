@@ -171,8 +171,10 @@ function updateMessage(input, response) {
                 }else{
                   intermediate_response = "Sorry.. We are not able to find any results. Try again."
                 }
-                for(let passage of data.passages){
-                  intermediate_response = intermediate_response.concat(passage.passage_text);
+                for(let passage of data.passages.sort(passage => passage.passage_score).reverse()){
+                  intermediate_response = intermediate_response.concat(passage.passage_text+
+                    '\nDocument Reference:https://content.cisco.com/welcome.html\n'+
+                    '\nPassage Score:'+passage.passage_score);
                 }
                 discovery_response = intermediate_response;
               });
@@ -182,7 +184,12 @@ function updateMessage(input, response) {
       });
 
       deasync.loopWhile(function(){return discovery_response === null});
-      responseText = discovery_response;
+      if(typeof(discovery_response) == "object"){
+        for(var t of discovery_response)
+          responseText += t.replace(/((<|=)([^>]*)>)/ig,"") + '<hr>';
+        responseText = responseText.replace(/(<p([^>]*))/ig,"");
+      }else
+        responseText = discovery_response;
     }catch(err){
       // for(let response_data of response.output.text){
       //   try{
@@ -195,8 +202,8 @@ function updateMessage(input, response) {
     }
     
   }
-  if (responseText.length == 0) {
-    responseText += "Sorry.. We are not able to find any result. Please try again."
+  if (responseText == undefined) {
+    responseText = "Sorry, I couldn't find an answer for your question. Can you please reframe the question and try again?"
   }
   response.output.text = responseText;
   return response;
